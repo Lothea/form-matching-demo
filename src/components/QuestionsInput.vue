@@ -20,19 +20,27 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      firstForm: "",
-      secondForm: "",
+      firstForm: `cat \ndog \nweasle`,
+      secondForm: `pet \nshot \nbet`,
     };
   },
   methods: {
     handleSubmit() {
       const firstForm = this.firstForm.split("\n");
       const secondForm = this.secondForm.split("\n");
+
+      for(let i = 0; i<firstForm.length; i++){
+        firstForm[i] = firstForm[i].trim()
+      }
+
+      for (let i = 0; i < secondForm.length; i++) {
+        secondForm[i] = secondForm[i].trim();
+        
+      }
       this.$store.dispatch("setResults", {
         sentences1: firstForm,
         sentences2: secondForm
       })
-
     },
     ...mapActions(["setResults"])
   },
